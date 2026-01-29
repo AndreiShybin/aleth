@@ -1,7 +1,7 @@
 # Multistage Dockerfile for the Aleth Ethereum node.
 
 # Build stage
-FROM alpine:latest as builder
+FROM alpine:3.23.3 as builder
 RUN apk add --no-cache \
         git \
         cmake \
@@ -14,7 +14,7 @@ RUN cmake /source -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DTOOLS
 RUN make -j $(nproc) && make install
 
 # Install stage
-FROM alpine:latest
+FROM alpine:3.23.3
 RUN apk add --no-cache \
         python3 \
         libstdc++
